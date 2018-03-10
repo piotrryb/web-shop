@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6c86f16b-3ece-4eeb-84f7-f3a2663167b1" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/hibernate/shop/Order.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/hibernate/shop/Price.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/hibernate/shop/Product.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/hibernate/shop/ProductRepository.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/hibernate/shop/ProductType.java" />
+    <list default="true" id="6c86f16b-3ece-4eeb-84f7-f3a2663167b1" name="Default" comment="init commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Ogloszenia.iml" afterPath="$PROJECT_DIR$/Ogloszenia.iml" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/src/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/src/hibernate.cfg.xml" />
-      <change beforePath="$PROJECT_DIR$/src/hibernate/App.java" afterPath="$PROJECT_DIR$/src/hibernate/App.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -625,12 +616,20 @@
       <option name="presentableId" value="Default" />
       <updated>1520671627391</updated>
       <workItem from="1520671631279" duration="363000" />
-      <workItem from="1520673860175" duration="11319000" />
+      <workItem from="1520673860175" duration="11499000" />
     </task>
+    <task id="LOCAL-00001" summary="init commit">
+      <created>1520687776376</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1520687776376</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11682000" />
+    <option name="totallyTimeSpent" value="11862000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -695,6 +694,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="init commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
