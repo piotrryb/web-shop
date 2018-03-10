@@ -1,11 +1,9 @@
 package hibernate;
 
-import hibernate.shop.Price;
-import hibernate.shop.Product;
-import hibernate.shop.ProductRepository;
-import hibernate.shop.ProductType;
+import hibernate.shop.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -63,5 +61,18 @@ public class App {
         }
 
         ProductRepository.deleteById(2L);
+
+        Order order = Order.builder()
+                .userEmail("test@sda.pl")
+                .totalGross(new BigDecimal(13))
+                .totalNet(new BigDecimal(12))
+                .build();
+        OrderRepository.saveOrder(order);
+
+
+        List<Order> all = OrderRepository.findAll();
+
+        ProductRepository.findAllNative()
+                .forEach(p -> System.out.println("find all product from native: " + p.getName()));
     }
 }

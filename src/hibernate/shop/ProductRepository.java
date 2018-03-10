@@ -156,4 +156,21 @@ public class ProductRepository {
             }
         }
     }
+
+    public static List<Product> findAllNative() {
+        Session session = null;
+        try {
+            session = HibernateUtil.openSession();
+            String sql = "SELECT * FROM product AS p";
+            Query query = session.createNativeQuery(sql, Product.class);
+            return query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Collections.emptyList();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
 }
