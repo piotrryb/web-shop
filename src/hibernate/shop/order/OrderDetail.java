@@ -1,5 +1,7 @@
-package hibernate.shop;
+package hibernate.shop.order;
 
+import hibernate.shop.Price;
+import hibernate.shop.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,12 +21,16 @@ public class OrderDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
     @Embedded
     Price price;
-
     BigDecimal amount;
-    //TODO add relation
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn
     Product product;
-    //TODO add relation
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn
     Order order;
 }

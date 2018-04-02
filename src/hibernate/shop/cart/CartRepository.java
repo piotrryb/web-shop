@@ -1,20 +1,19 @@
-package hibernate.shop;
+package hibernate.shop.cart;
 
 import hibernate.hibernate.util.HibernateUtil;
+import hibernate.shop.cart.Cart;
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.Optional;
 
-public class OrderRepository {
+public class CartRepository {
 
-    public static void saveOrder(Order order) {
+    public static void saveCart(Cart cart) {
         Session session = null;
         try {
             session = HibernateUtil.openSession();
             session.getTransaction().begin();
-            session.saveOrUpdate(order);
+            session.saveOrUpdate(cart);
             session.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -28,16 +27,15 @@ public class OrderRepository {
         }
     }
 
-    public static List<Order> findAll() {
+    public static Optional<Cart> findOneById(Long id) {
         Session session = null;
         try {
             session = HibernateUtil.openSession();
-            String jpql = "SELECT new hibernate.shop.Order (p.totalGross, p.userEmail) FROM Order p";
-            Query query = session.createQuery(jpql);
-            return query.getResultList();
+            Cart cart = session.find(Cart.class, id);
+            return Optional.ofNullable(cart);
         } catch (Exception ex) {
             ex.printStackTrace();
-            return Collections.emptyList();
+            return Optional.empty();
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();

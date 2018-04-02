@@ -1,9 +1,13 @@
-package hibernate.shop;
+package hibernate.shop.product;
 
 import hibernate.hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
@@ -157,6 +161,34 @@ public class ProductRepository {
         }
     }
 
+    public static List<Product> findAllByNameLikeWithCriteria(String name) {
+        Session session = null;
+        try {
+            // open session
+            session = HibernateUtil.openSession();
+            // create CriteriaBuilder
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+
+            CriteriaQuery<Product> query = cb.createQuery(Product.class);
+            // Definiujemy z której encji pobieramy -> from
+            Root<Product> from = query.from(Product.class);
+            query.select(from);
+
+            //predykaty, czyli warunki where
+            Predicate whereNameLike = cb.like(from.get("name"), "%" + name.toUpperCase() + "%");
+
+            CriteriaQuery<Product> criteriaQuery = query.where(whereNameLike);
+            return session.createQuery(criteriaQuery).getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Collections.emptyList();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
     public static List<Product> findAllNative() {
         Session session = null;
         try {
@@ -164,6 +196,64 @@ public class ProductRepository {
             String sql = "SELECT * FROM product AS p";
             Query query = session.createNativeQuery(sql, Product.class);
             return query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Collections.emptyList();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public static List<Product> findAllToyOrCarCheaperThan(BigDecimal price) {
+        Session session = null;
+        try {
+            session = HibernateUtil.openSession();
+            String jpql = "SELECT p FROM Product p WHERE (p.productType = :toy or p.productType = :car) and p.price.grossPrice < :price";
+            Query query = session.createQuery(jpql);
+            query.setParameter("price", price);
+            query.setParameter("toy", ProductType.TOY);
+            query.setParameter("car", ProductType.CAR);
+
+            query.setMaxResults(30);
+            query.setFirstResult(0);
+
+            return query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Collections.emptyList();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public static List<Product> findAllToyOrCarCheaperThanLikePredicate(String name) {
+        Session session = null;
+        try {
+            session = HibernateUtil.openSession();
+            // create CriteriaBuilder
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+
+            CriteriaQuery<Product> query = cb.createQuery(Product.class);
+            // Definiujemy z której encji pobieramy -> FROM
+            Root<Product> from = query.from(Product.class);
+            query.select(from);
+
+            //predykaty, czyli warunki where
+            Predicate toyProduct = cb.equal(from.get("productType"), ProductType.TOY);
+            Predicate carProduct = cb.equal(from.get("productType"), ProductType.CAR);
+
+            Predicate namePredicate = cb.like(
+                    from.get("name"), "%" + name.toUpperCase() + "%");
+
+            Predicate toyOrCar = cb.or(toyProduct, carProduct);
+            Predicate whereToyOrCarAndPrice = cb.and(toyOrCar, namePredicate);
+
+            CriteriaQuery<Product> criteriaQuery = query.where(whereToyOrCarAndPrice);
+            return session.createQuery(criteriaQuery).getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
             return Collections.emptyList();

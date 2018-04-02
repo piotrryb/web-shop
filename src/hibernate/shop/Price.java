@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 @Embeddable
 public class Price {
 
-    BigDecimal netPrice;
-    BigDecimal grossPrice;
+    private BigDecimal netPrice;
+    private BigDecimal grossPrice;
 
     @Transient
     BigDecimal vatPrice;
