@@ -1,6 +1,5 @@
 package hibernate.shop.complaint;
 
-import hibernate.shop.complaint.ComplaintStatus;
 import hibernate.shop.order.Order;
 import lombok.*;
 

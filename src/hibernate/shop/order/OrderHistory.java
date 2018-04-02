@@ -1,6 +1,5 @@
 package hibernate.shop.order;
 
-import hibernate.shop.order.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
