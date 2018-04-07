@@ -146,7 +146,6 @@ public class App {
                 .build();
 
         Cart cart = Cart.builder()
-                .email("jan.kowalski@gmail.com")
                 .cartDetailSet(new HashSet<>())
                 .build();
 

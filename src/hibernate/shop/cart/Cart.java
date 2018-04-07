@@ -1,6 +1,7 @@
 package hibernate.shop.cart;
 
 import hibernate.shop.Price;
+import hibernate.shop.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,7 +24,8 @@ public class Cart implements Serializable {
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     Set<CartDetail> cartDetailSet;
 
-    String email;
+    @OneToOne
+    User user;
 
     @Transient
     Price price;

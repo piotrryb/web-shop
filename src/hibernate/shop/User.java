@@ -1,14 +1,12 @@
 package hibernate.shop;
 
+import hibernate.shop.cart.Cart;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -24,4 +22,7 @@ public class User implements Serializable {
     String password;
     String firstName;
     String lastName;
+
+    @OneToOne (mappedBy = "user")
+    Cart cart;
 }
