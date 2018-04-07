@@ -20,8 +20,8 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
     String email;
-
     String password;
+    String firstName;
+    String lastName;
 }
