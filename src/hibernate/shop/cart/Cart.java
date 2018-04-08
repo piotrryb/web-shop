@@ -34,18 +34,4 @@ public class Cart implements Serializable {
         cartDetail.setCart(this);
         cartDetailSet.add(cartDetail);
     }
-
-//    public Price getPrice() {
-//        price = new Price();
-//        price.setNetPrice(new BigDecimal(0));
-//        price.setGrossPrice(new BigDecimal(0));
-//
-//        for (CartDetail cd : cartDetailSet) {
-//            BigDecimal netPrice = cd.getPrice().getNetPrice().multiply(cd.getAmount());
-//            BigDecimal grossPrice = cd.getPrice().getGrossPrice().multiply(cd.getAmount());
-//            price.getNetPrice().add(netPrice);
-//            price.getGrossPrice().add(grossPrice);
-//        }
-//        return price;
-//    }
 }
