@@ -4,6 +4,7 @@ import hibernate.shop.User;
 import hibernate.shop.UserRepository;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,5 +22,9 @@ public class LoginServlet extends HttpServlet {
         Optional<User> byEmailAndPassword = UserRepository.findByEmailAndPassword(email, password);
 
         byEmailAndPassword.ifPresent(x -> System.out.println("User id: " + x.getId()));
+
+        if (byEmailAndPassword.isPresent()) {
+            resp.addCookie(new Cookie("email",byEmailAndPassword.get().getEmail()));
+        }
     }
 }
