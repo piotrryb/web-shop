@@ -1,6 +1,5 @@
-package hibernate.shop.cart;
+package hibernate.shop;
 
-import hibernate.shop.Price;
 import hibernate.shop.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,30 +7,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class CartDetail implements Serializable {
-
+public class ProductRating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    int rating;
+    String description;
+    LocalDateTime createDate;
     @ManyToOne
-    @JoinColumn
-    Cart cart;
-
+    User user;
     @ManyToOne
-    @JoinColumn
     Product product;
-
-    BigDecimal amount;
-
-    @Embedded
-    Price price;
+    boolean isVisible;
 }

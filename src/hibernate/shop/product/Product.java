@@ -1,6 +1,7 @@
 package hibernate.shop.product;
 
 import hibernate.shop.Price;
+import hibernate.shop.ProductRating;
 import hibernate.shop.cart.CartDetail;
 import hibernate.shop.order.OrderDetail;
 import lombok.Data;
@@ -38,6 +39,9 @@ public class Product implements Serializable{
 
     @OneToMany(mappedBy = "product")
     Set<CartDetail> cartDetailSet;
+
+    @OneToMany(mappedBy = "product")
+    Set<ProductRating> productRatingSet;
 
     public Product() {
     }

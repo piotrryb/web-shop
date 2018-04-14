@@ -52,10 +52,29 @@ public class CartRepository {
             String jpql = "SELECT c FROM Cart c WHERE c.user.id = :userId";
             Query query = session.createQuery(jpql);
             query.setParameter("userId", userId);
-            return Optional.ofNullable((Cart)query.getSingleResult());
+            return Optional.ofNullable((Cart) query.getSingleResult());
         } catch (Exception ex) {
             ex.printStackTrace();
             return Optional.empty();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public static void removeCart(Cart cart) {
+        Session session = null;
+        try {
+            session = HibernateUtil.openSession();
+            session.getTransaction().begin();
+            session.remove(cart);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            if (session.getTransaction().isActive()) {
+                session.getTransaction().rollback();
+            }
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();

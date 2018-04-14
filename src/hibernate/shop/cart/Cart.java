@@ -34,4 +34,19 @@ public class Cart implements Serializable {
         cartDetail.setCart(this);
         cartDetailSet.add(cartDetail);
     }
+
+    public BigDecimal getTotalGrossPrice() {
+//        double sum = cartDetailSet.stream().mapToDouble(cd -> cd.getAmount()
+//                .multiply(cd.getPrice().getGrossPrice()).doubleValue()).sum();
+        BigDecimal totalGross = cartDetailSet.stream().map(cd -> cd.getAmount().multiply(cd.getPrice().getGrossPrice()))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return totalGross;
+
+    }
+
+    public BigDecimal getTotalNetPrice() {
+        BigDecimal totalNet = cartDetailSet.stream().map(cd -> cd.getAmount().multiply(cd.getPrice().getNetPrice()))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return totalNet;
+    }
 }

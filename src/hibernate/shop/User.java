@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Data
@@ -25,4 +26,7 @@ public class User implements Serializable {
 
     @OneToOne (mappedBy = "user")
     Cart cart;
+
+    @OneToMany(mappedBy = "user")
+    Set<ProductRating> productRatingSet;
 }
