@@ -20,8 +20,8 @@ public class AddNewProductRatingServlet extends HttpServlet {
 
         User userFromCookie = UserSessionHelper.getUserFromCookie(req.getCookies());
         String description = req.getParameter("description");
-        Optional<Product> product = ProductRepository.findOneById(ProjectHelper.parseStringToLong("productId"));
-        int rating = ProjectHelper.parseStringToLong("rating").intValue();
+        Optional<Product> product = ProductRepository.findOneById(ProjectHelper.parseStringToLong(req.getParameter("productId")));
+        double rating = ProjectHelper.parseStringToDouble(req.getParameter("rating"));
 
         if (product.isPresent() && userFromCookie != null && rating > 0) {
             ProductRating productRating = new ProductRating();

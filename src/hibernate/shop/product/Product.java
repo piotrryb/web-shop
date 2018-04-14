@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@EqualsAndHashCode(exclude = {"orderDetailSet","cartDetailSet"})
+@EqualsAndHashCode(exclude = {"orderDetailSet","cartDetailSet","productRatingSet"})
 public class Product implements Serializable{
 
     @Id
@@ -32,6 +32,8 @@ public class Product implements Serializable{
 
     @Embedded
     private Price price;
+
+    private String description;
 
     @OneToMany(mappedBy = "product")
     // one product may be on many positions in order

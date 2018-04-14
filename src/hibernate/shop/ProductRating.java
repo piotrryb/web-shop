@@ -18,8 +18,7 @@ public class ProductRating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
-    int rating;
+    Double rating;
     String description;
     LocalDateTime createDate;
     @ManyToOne
