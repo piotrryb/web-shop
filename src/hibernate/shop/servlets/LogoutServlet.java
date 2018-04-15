@@ -20,8 +20,6 @@ public class LogoutServlet extends HttpServlet {
                 resp.addCookie(cookie);
             }
         }
-        resp.getWriter().write("Zostałeś wylogowany");
-
-        req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        req.getRequestDispatcher("/index.jsp?isSuccessLogout=true").forward(req, resp);
     }
 }

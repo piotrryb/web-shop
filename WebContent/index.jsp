@@ -24,12 +24,19 @@
 <%
     List<Product> allProduct = ProductRepository.findAll();
     pageContext.setAttribute("allProduct", allProduct);
+
+    if (request.getParameter("isSuccessLogout") != null && request.getParameter("isSuccessLogout").equals("true")) {
+        pageContext.setAttribute("info", "You are logged out!");
+    }
 %>
 <body>
 
 <!-- Navigation -->
 <%@include file="head.jsp" %>
 
+<c:if test="${info != null && info.length() > 0}">
+    <div class="alert alert-danger" role="alert">${info}</div>
+</c:if>
 <!-- Page Content -->
 <div class="container">
 
