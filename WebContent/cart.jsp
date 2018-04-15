@@ -1,3 +1,6 @@
+<%@ page import="hibernate.shop.cart.CartRepository" %>
+<%@ page import="hibernate.shop.cart.Cart" %>
+<%@ page import="java.util.Optional" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,66 +27,57 @@
 
     <!-- Navigation -->
     <%@include file="head.jsp"%>
+    <%
+        if (userFromCookie != null) {
+            Optional<Cart> byUserId = CartRepository.findByUserId(userFromCookie.getId());
+            if (byUserId.isPresent()) {
+                pageContext.setAttribute("cart",byUserId.get());
+            }
+        }
+    %>
 
     <!-- Page Content -->
     <div class="container">
-
         <div class="row">
-
             <%@include file="leftMenu.jsp"%>
             <!-- /.col-lg-3 -->
-
             <div class="col-lg-9">
-                <h2>Koszyk</h2>
+                <h2>Cart</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Nazwa produktu</th>
-                            <th scope="col">Ilość</th>
-                            <th scope="col">Kwota netto</th>
-                            <th scope="col">Kwota brutto</th>
-                            <th scope="col">Razem</th>
+                            <th scope="col">Product name</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Net price</th>
+                            <th scope="col">Gross price</th>
+                            <th scope="col">Total net</th>
+                            <th scope="col">Total gross</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <c:forEach items="${cart.cartDetailSet}" var="cd" varStatus="it">
                         <tr>
-                            <th scope="row">Zabawka</th>
+                            <th scope="row">${cd.product.name}</th>
                             <td>
-                                <input name="amount_1" />
+                                <input name="amount_1" value="${cd.amount}"/>
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true">
                                     +
                                     -
                                 </span>
-
                             </td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>500</td>
+                            <td>${cd.price.netPrice}</td>
+                            <td>${cd.price.grossPrice}</td>
+                            <td>${cd.price.netPrice.multiply(cd.amount)}</td>
+                            <td>${cd.price.grossPrice.multiply(cd.amount)}</td>
                         </tr>
-                        <tr>
-                            <th scope="row">Auto</th>
-                            <td><input name="amount_1"></td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>20</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Banan</th>
-                            <td><input name="amount_1"></td>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                            <td>100</td>
-                        </tr>
+                    </c:forEach>
                     </tbody>
                     <tfoot>
                         <tr>
                             <td></td>
-                            <td><b>Suma:</b></td>
-                            <td>2000zł</td>
-                            <td>2200zł</td>
+                            <td><b>Sum:</b></td>
+                            <td>${cart.totalNetPrice} zł</td>
+                            <td>${cart.totalGrossPrice} zł</td>
                         </tr>
                     </tfoot>
                 </table>

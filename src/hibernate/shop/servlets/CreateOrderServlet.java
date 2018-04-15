@@ -9,12 +9,10 @@ import hibernate.shop.order.Order;
 import hibernate.shop.order.OrderDetail;
 import hibernate.shop.order.OrderRepository;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Optional;
 
@@ -22,7 +20,7 @@ import java.util.Optional;
 public class CreateOrderServlet extends HttpServlet {
 
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         User userFromCookie = UserSessionHelper.getUserFromCookie(req.getCookies());
         if (userFromCookie != null) {
             Optional<Cart> byUserId = CartRepository.findByUserId(userFromCookie.getId());
@@ -34,7 +32,7 @@ public class CreateOrderServlet extends HttpServlet {
         Order order = new Order();
         order.setTotalGross(cart.getTotalGrossPrice());
         order.setTotalNet(cart.getTotalNetPrice());
-        order.setUserEmail(cart.getUser().getEmail());
+        order.setUser(cart.getUser());
 
         order.setOrderDetailSet(new HashSet<>());
 

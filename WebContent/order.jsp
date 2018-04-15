@@ -1,3 +1,9 @@
+<%@ page import="hibernate.shop.order.OrderDetail" %>
+<%@ page import="java.util.List" %>
+<%@ page import="hibernate.shop.order.Order" %>
+<%@ page import="hibernate.shop.order.OrderRepository" %>
+<%@ page import="java.util.Optional" %>
+<%@ page import="hibernate.shop.ProjectHelper" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +30,15 @@
     <!-- Navigation -->
     <%@include file="head.jsp"%>
 
+    <%
+        String orderId = request.getParameter("orderId");
+        Optional<Order> order = OrderRepository.findOrder(ProjectHelper.parseStringToLong(orderId));
+
+        if (order.isPresent() && userFromCookie != null && order.get().getUser().getId().equals(userFromCookie.getId())) {
+            pageContext.setAttribute("order", order.get());
+        }
+    %>
+
     <!-- Page Content -->
     <div class="container">
 
@@ -34,8 +49,9 @@
 
             <div class="col-lg-9">
                 <div class="card-body">
-                    <h3 class="card-title">Zamówienie numer 333</h3>
-                    <h4>kwota 333zl</h4>
+                    <h3 class="card-title">Order no. ${order.id}</h3>
+                    <h4>Total gross: ${order.totalGross}</h4>
+                    <h5>Total net: ${order.totalNet}</h5>
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
 
                 </div>
@@ -43,19 +59,25 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Nazwa produktu</th>
-                            <th scope="col">Kwota netto</th>
-                            <th scope="col">Kwota brutto</th>
-                            <th scope="col">coś</th>
+                            <th scope="col">No.</th>
+                            <th scope="col">Product name</th>
+                            <th scope="col">Net price</th>
+                            <th scope="col">Gross price</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Description</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <c:forEach items="${order.orderDetailSet}" var="od" varStatus="it">
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <th scope="row">${it.index+1}</th>
+                            <td>${od.product.name}</td>
+                            <td>${od.price.netPrice.multiply(od.amount)} zł</td>
+                            <td>${od.price.grossPrice.multiply(od.amount)} zł</td>
+                            <td>${od.amount}</td>
+                            <td>${od.product.description}</td>
                         </tr>
+                    </c:forEach>
                         <tr>
                             <th scope="row">2</th>
                             <td>Jacob</td>

@@ -1,3 +1,6 @@
+<%@ page import="hibernate.shop.order.Order" %>
+<%@ page import="java.util.List" %>
+<%@ page import="hibernate.shop.order.OrderRepository" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +27,13 @@
     <!-- Navigation -->
     <%@include file="head.jsp"%>
 
+    <%
+        if (userFromCookie != null) {
+            List<Order> allOrders = OrderRepository.findAllByUserId(userFromCookie.getId(),0);
+            pageContext.setAttribute("userOrders", allOrders);
+        }
+    %>
+
     <!-- Page Content -->
     <div class="container">
 
@@ -37,6 +47,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th scope="col">Lp.</th>
                             <th scope="col">Data</th>
                             <th scope="col">Kwota netto</th>
                             <th scope="col">Kwota brutto</th>
@@ -44,24 +55,17 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                    <c:forEach items="${userOrders}" var="order" varStatus="lp">
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <th scope="row">${lp.index+1}</th>
+                            <td>${order.orderHistory.confirmDate}</td>
+                            <td>${order.totalNet}</td>
+                            <td>${order.totalGross}</td>
+                            <td><a href="/order.jsp?orderId=${order.id}">Details</a></td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
+                    </c:forEach>
+
                     </tbody>
                 </table>
                 <!-- /.card -->

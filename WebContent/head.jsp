@@ -33,15 +33,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
-                </li>
+
                 <c:if test="${user == null}">
                     <li class="nav-item">
                         <a class="nav-link" href="/login.jsp">Login</a>
                     </li>
                 </c:if>
                 <c:if test="${user != null}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/orderHistory.jsp">Orders</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link">${user.firstName} ${user.lastName}</a>
                     </li>

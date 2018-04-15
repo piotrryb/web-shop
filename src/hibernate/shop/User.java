@@ -1,6 +1,7 @@
 package hibernate.shop;
 
 import hibernate.shop.cart.Cart;
+import hibernate.shop.order.Order;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = "productRatingSet")
+@EqualsAndHashCode(exclude = {"productRatingSet", "orderSet"})
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +28,7 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "user")
     Set<ProductRating> productRatingSet;
+
+    @OneToMany(mappedBy = "user")
+    Set<Order> orderSet;
 }

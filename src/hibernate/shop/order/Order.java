@@ -1,5 +1,6 @@
 package hibernate.shop.order;
 
+import hibernate.shop.User;
 import hibernate.shop.complaint.OrderComplaint;
 import lombok.*;
 
@@ -22,7 +23,10 @@ public class Order implements Serializable {
     Long id;
     BigDecimal totalNet;
     BigDecimal totalGross;
-    String userEmail;
+
+    @ManyToOne
+    @JoinColumn
+    User user;
 
     // one order has many positions owner of relation will be order detail
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -41,9 +45,9 @@ public class Order implements Serializable {
     )
     Set<OrderComplaint> orderComplaintSet;
 
-    public Order(BigDecimal totalGross, String userEmail) {
+    public Order(BigDecimal totalGross, User user) {
         this.totalGross = totalGross;
-        this.userEmail = userEmail;
+        this.user = user;
     }
 
     public void addOrderDetail(OrderDetail orderDetail) {
