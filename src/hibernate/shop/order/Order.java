@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.Set;
 
 @Entity
@@ -15,7 +16,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"orderDetailSet", "orderComplaintSet"})
+@EqualsAndHashCode(exclude = {"orderDetailSet", "orderComplaintSet", "orderHistorySet"})
 public class Order implements Serializable {
 
     @Id
@@ -33,8 +34,8 @@ public class Order implements Serializable {
     Set<OrderDetail> orderDetailSet;
 
     // właścicielem relacji jest druga storna czyli order history
-    @OneToOne(mappedBy = "order")
-    OrderHistory orderHistory;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    Set<OrderHistory> orderHistorySet;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
@@ -53,5 +54,15 @@ public class Order implements Serializable {
     public void addOrderDetail(OrderDetail orderDetail) {
         orderDetail.setOrder(this);
         orderDetailSet.add(orderDetail);
+    }
+
+    public void addOrderHistory(OrderHistory orderHistory) {
+        orderHistory.setOrder(this);
+        this.orderHistorySet.add(orderHistory);
+    }
+
+    public OrderHistory getCurrentOrderHistory() {
+        return this.getOrderHistorySet().stream().sorted(Comparator.comparing(OrderHistory::getId)).findFirst()
+                .orElse(new OrderHistory());
     }
 }

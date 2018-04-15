@@ -32,5 +32,6 @@ public class AddNewProductRatingServlet extends HttpServlet {
             productRating.setProduct(product.get());
             ProductRatingRepository.saveProductRating(productRating);
         }
+        req.getRequestDispatcher("/product.jsp?productId="+product.get().getId()).forward(req,resp);
     }
 }

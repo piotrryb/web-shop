@@ -2,6 +2,7 @@
 <%@ page import="hibernate.shop.cart.Cart" %>
 <%@ page import="java.util.Optional" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,19 +66,25 @@
                                     -
                                 </span>
                             </td>
-                            <td>${cd.price.netPrice}</td>
-                            <td>${cd.price.grossPrice}</td>
-                            <td>${cd.price.netPrice.multiply(cd.amount)}</td>
-                            <td>${cd.price.grossPrice.multiply(cd.amount)}</td>
+                            <td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2"
+                                                  value="${cd.price.netPrice}"/></td>
+                            <td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2"
+                                                  value="${cd.price.grossPrice}"/></td>
+                            <fmt:formatNumber var="totalNetPrice" type="number" minFractionDigits="2" maxFractionDigits="2" value="${cd.price.netPrice.multiply(cd.amount)}"/>
+                            <fmt:formatNumber var="totalGrossPrice" type="number" minFractionDigits="2" maxFractionDigits="2" value="${cd.price.grossPrice.multiply(cd.amount)}"/>
+                            <td>${totalNetPrice}</td>
+                            <td>${totalGrossPrice}</td>
                         </tr>
                     </c:forEach>
                     </tbody>
                     <tfoot>
                         <tr>
                             <td></td>
-                            <td><b>Sum:</b></td>
-                            <td>${cart.totalNetPrice} zł</td>
-                            <td>${cart.totalGrossPrice} zł</td>
+                            <td colspan="3"><b>Total:</b></td>
+                            <td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2"
+                                                  value="${cart.totalNetPrice}"/></td>
+                            <td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2"
+                                                  value="${cart.totalGrossPrice}"/></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -100,18 +107,18 @@
                         </div>
                         <div class="col-md-12">
                             <label>Kod pocztowy</label>
-                            <input type="zipCode" class="form-control" name="city" />
+                            <input type="text" class="form-control" name="zipCode" />
                         </div>
                         <div class="col-md-12">
                             <label>Ulica</label>
-                            <input type="street" class="form-control" name="city" />
+                            <input type="text" class="form-control" name="street" />
                         </div>
 
                     </div>
                 </div>
 
                 <div>
-                    <button class="btn btn-success">Kup i zapłać</button>
+                    <a href="/createOrder" class="btn btn-success">Kup i zapłać</a>
                 </div>
 
             </div>

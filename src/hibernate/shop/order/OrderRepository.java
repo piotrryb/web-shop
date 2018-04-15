@@ -34,11 +34,10 @@ public class OrderRepository {
         Session session = null;
         try {
             session = HibernateUtil.openSession();
-            Optional<Order> order = Optional.ofNullable(session.find(Order.class, id));
-            if (order.isPresent()) {
-                order.get().getOrderDetailSet();
-            }
-            return  order;
+            String hql = "SELECT o FROM Order o LEfT JOIN FETCH o.orderDetailSet od WHERE o.id= :id";
+            Query query = session.createQuery(hql);
+            query.setParameter("id", id);
+            return Optional.ofNullable((Order) query.getSingleResult());
         } catch (Exception ex) {
             ex.printStackTrace();
             return Optional.empty();

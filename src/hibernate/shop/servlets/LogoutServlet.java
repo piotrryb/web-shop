@@ -21,5 +21,7 @@ public class LogoutServlet extends HttpServlet {
             }
         }
         resp.getWriter().write("Zostałeś wylogowany");
+
+        req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }

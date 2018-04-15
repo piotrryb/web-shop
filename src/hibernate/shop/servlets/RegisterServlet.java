@@ -45,5 +45,6 @@ public class RegisterServlet extends HttpServlet {
             user.setLastName(lastName);
             UserRepository.saveUser(user);
         }
+        req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }

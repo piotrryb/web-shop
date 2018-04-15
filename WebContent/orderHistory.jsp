@@ -1,6 +1,6 @@
 <%@ page import="hibernate.shop.order.Order" %>
-<%@ page import="java.util.List" %>
 <%@ page import="hibernate.shop.order.OrderRepository" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,11 +47,12 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Lp.</th>
-                            <th scope="col">Data</th>
-                            <th scope="col">Kwota netto</th>
-                            <th scope="col">Kwota brutto</th>
-                            <th scope="col">Guziki</th>
+                            <th scope="col">No.</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Net price</th>
+                            <th scope="col">Gross price</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,7 +60,8 @@
                     <c:forEach items="${userOrders}" var="order" varStatus="lp">
                         <tr>
                             <th scope="row">${lp.index+1}</th>
-                            <td>${order.orderHistory.confirmDate}</td>
+                            <td>${order.currentOrderHistory.statusDate}</td>
+                            <td>${order.currentOrderHistory.orderStatus}</td>
                             <td>${order.totalNet}</td>
                             <td>${order.totalGross}</td>
                             <td><a href="/order.jsp?orderId=${order.id}">Details</a></td>

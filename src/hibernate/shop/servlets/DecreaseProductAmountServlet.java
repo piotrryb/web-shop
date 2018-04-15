@@ -7,17 +7,19 @@ import hibernate.shop.cart.Cart;
 import hibernate.shop.cart.CartDetail;
 import hibernate.shop.cart.CartRepository;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Optional;
 
 @WebServlet(name = "DecreaseProductAmountServlet", urlPatterns = "/decreaseProductAmount")
 public class DecreaseProductAmountServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long productId = ProjectHelper.parseStringToLong(req.getParameter("productId"));
         String method = req.getParameter("method");
         User user = UserSessionHelper.getUserFromCookie(req.getCookies());
@@ -46,5 +48,6 @@ public class DecreaseProductAmountServlet extends HttpServlet {
                 }
             }
         }
+        req.getRequestDispatcher("/cart.jsp").forward(req,resp);
     }
 }
