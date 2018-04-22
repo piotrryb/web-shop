@@ -81,6 +81,7 @@
                         <div class="card h-100">
                             <a href="/product.jsp?productId=${product.id}">
                                 <img class="card-img-top" src="/productImage?productId=${product.id}" alt=""></a>
+                            <!--700x400-->
                             <div class="card-body">
                                 <h4 class="card-title">
                                     <a href="/product.jsp?productId=${product.id}">${product.name}</a>

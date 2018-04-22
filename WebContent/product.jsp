@@ -68,6 +68,7 @@
 
         <div class="col-md-8">
             <img class="img-fluid" src="/productImage?productId=${product.id}" alt="">
+            <!--750x500-->
         </div>
 
         <div class="col-md-4">
