@@ -61,7 +61,7 @@
 
 <!-- Page Content -->
 <div class="container">
-    <form method="post" action="/editOrAddProduct">
+    <form method="post" action="/editOrAddProduct" enctype="multipart/form-data">
         <div class="form-group">
             <label>Name</label>
             <input type="text" name="name" value="${product.name}">
@@ -91,6 +91,9 @@
         <div class=" form-group">
             <label>Description:</label>
             <textarea name="description">${product.description}</textarea>
+        </div>
+        <div class="form-group">
+            <input type="file" name="image"/>
         </div>
         <div class="form-group">
             <button type="submit">Save</button>
