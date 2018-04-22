@@ -1,6 +1,7 @@
 package hibernate.shop.product;
 
 import hibernate.hibernate.util.HibernateUtil;
+import hibernate.shop.ProductRating;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -100,6 +101,42 @@ public class ProductRepository {
         } catch (Exception ex) {
             ex.printStackTrace();
             return Collections.emptyList();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public static List<ProductRating> findAllRatingByProductId(Long id) {
+        Session session = null;
+        try {
+            session = HibernateUtil.openSession();
+            String jpql = "SELECT p FROM ProductRating p WHERE p.product.id = :productRating";
+            Query query = session.createQuery(jpql);
+            query.setParameter("productRating", id);
+            return query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Collections.emptyList();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public static Double avgRatingByProductId(Long id) {
+        Session session = null;
+        try {
+            session = HibernateUtil.openSession();
+            String jpql = "SELECT avg(p.rating) FROM ProductRating p WHERE p.product.id = :productRating";
+            Query query = session.createQuery(jpql);
+            query.setParameter("productRating", id);
+            return (Double) query.getSingleResult();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return 0d;
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();

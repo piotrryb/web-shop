@@ -14,6 +14,15 @@
     if (userFromCookie != null) {
         pageContext.setAttribute("user", userFromCookie);
     }
+
+    Object i = session.getAttribute("i");
+    if (i == null) {
+        session.setAttribute("i", 1);
+    } else {
+        session.setAttribute("i", (int) i + 1);
+    }
+
+    pageContext.setAttribute("i", session.getAttribute("i"));
 %>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -25,6 +34,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Counter: ${i}</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>

@@ -14,17 +14,17 @@ import java.util.Set;
 
 @Entity
 @Data
-@EqualsAndHashCode(exclude = {"orderDetailSet","cartDetailSet","productRatingSet"})
-public class Product implements Serializable{
+@EqualsAndHashCode(exclude = {"orderDetailSet", "cartDetailSet", "productRatingSet"})
+public class Product implements Serializable {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
 
     private String name;
 
-    @Column ()
+    @Column()
     private LocalDate date;
 
     @Enumerated
@@ -35,8 +35,11 @@ public class Product implements Serializable{
 
     private String description;
 
-    @OneToMany(mappedBy = "product")
+    @Lob
+    private byte[] image;
+
     // one product may be on many positions in order
+    @OneToMany(mappedBy = "product")
     Set<OrderDetail> orderDetailSet;
 
     @OneToMany(mappedBy = "product")
