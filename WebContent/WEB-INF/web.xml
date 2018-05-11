@@ -3,23 +3,23 @@
   <display-name>Shop</display-name>
   <servlet>
     <servlet-name>HelloServlet</servlet-name>
-    <servlet-class>hibernate.shop.servlets.HelloServlet</servlet-class>
+    <servlet-class>com.shop.servlets.HelloServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>hibernate.shop.servlets.LoginServlet</servlet-class>
+    <servlet-class>com.shop.servlets.LoginServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>LogoutServlet</servlet-name>
-    <servlet-class>hibernate.shop.servlets.LogoutServlet</servlet-class>
+    <servlet-class>com.shop.servlets.LogoutServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>RegisterServlet</servlet-name>
-    <servlet-class>hibernate.shop.servlets.RegisterServlet</servlet-class>
+    <servlet-class>com.shop.servlets.RegisterServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>AddProductToCartServlet</servlet-name>
-    <servlet-class>hibernate.shop.servlets.AddProductToCartServlet</servlet-class>
+    <servlet-class>com.shop.servlets.AddProductToCartServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>HelloServlet</servlet-name>

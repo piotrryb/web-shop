@@ -1,5 +1,5 @@
-<%@ page import="hibernate.shop.UserSessionHelper" %>
-<%@ page import="hibernate.shop.domain.User" %>
+<%@ page import="com.shop.UserSessionHelper" %>
+<%@ page import="com.shop.domain.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.

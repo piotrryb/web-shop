@@ -13,15 +13,15 @@
         <property name="show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <mapping class="hibernate.shop.domain.Product"/>
-        <mapping class="hibernate.shop.Order"/>
-        <mapping class="hibernate.shop.domain.OrderDetail"/>
-        <mapping class="hibernate.shop.domain.OrderHistory"/>
-        <mapping class="hibernate.shop.domain.OrderComplaint"/>
-        <mapping class="hibernate.shop.domain.Cart"/>
-        <mapping class="hibernate.shop.domain.CartDetail"/>
-        <mapping class="hibernate.shop.domain.User"/>
-        <mapping class="hibernate.shop.domain.ProductRating"/>
+        <mapping class="com.shop.domain.Product"/>
+        <mapping class="com.shop.domain.Order"/>
+        <mapping class="com.shop.domain.OrderDetail"/>
+        <mapping class="com.shop.domain.OrderHistory"/>
+        <mapping class="com.shop.domain.OrderComplaint"/>
+        <mapping class="com.shop.domain.Cart"/>
+        <mapping class="com.shop.domain.CartDetail"/>
+        <mapping class="com.shop.domain.User"/>
+        <mapping class="com.shop.domain.ProductRating"/>
 
     </session-factory>
 </hibernate-configuration>

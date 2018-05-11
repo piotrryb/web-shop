@@ -1,5 +1,5 @@
-<%@ page import="hibernate.shop.Order" %>
-<%@ page import="hibernate.shop.repository.OrderRepository" %>
+<%@ page import="com.shop.domain.Order" %>
+<%@ page import="com.shop.repository.OrderRepository" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
