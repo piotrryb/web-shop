@@ -4,9 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
- 
 public class HibernateUtil {
- 
+
     private static final SessionFactory sessionFactory;
  
     static {
@@ -14,7 +13,7 @@ public class HibernateUtil {
             sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError("Blad polaczenia z baza danych!");
+            throw new ExceptionInInitializerError("Connection error with the database!");
         }
     }
  
@@ -23,7 +22,7 @@ public class HibernateUtil {
     	try {
     		session = sessionFactory.openSession();
     	} catch (Exception e) {
-    		throw new Exception("Blad polaczenia z baza danych!");
+    		throw new Exception("Connection error with the database!");
     	}
         return session;
     }

@@ -1,7 +1,6 @@
-package hibernate.shop.cart;
+package hibernate.shop.domain;
 
 import hibernate.shop.Price;
-import hibernate.shop.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +15,6 @@ import java.util.Set;
 @Builder
 @EqualsAndHashCode(exclude = {"cartDetailSet", "user"})
 public class Cart implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -36,17 +34,12 @@ public class Cart implements Serializable {
     }
 
     public BigDecimal getTotalGrossPrice() {
-//        double sum = cartDetailSet.stream().mapToDouble(cd -> cd.getAmount()
-//                .multiply(cd.getPrice().getGrossPrice()).doubleValue()).sum();
-        BigDecimal totalGross = cartDetailSet.stream().map(cd -> cd.getAmount().multiply(cd.getPrice().getGrossPrice()))
+        return cartDetailSet.stream().map(cd -> cd.getAmount().multiply(cd.getPrice().getGrossPrice()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-        return totalGross;
-
     }
 
     public BigDecimal getTotalNetPrice() {
-        BigDecimal totalNet = cartDetailSet.stream().map(cd -> cd.getAmount().multiply(cd.getPrice().getNetPrice()))
+        return cartDetailSet.stream().map(cd -> cd.getAmount().multiply(cd.getPrice().getNetPrice()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-        return totalNet;
     }
 }

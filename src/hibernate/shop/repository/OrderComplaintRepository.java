@@ -1,16 +1,17 @@
-package hibernate.shop;
+package hibernate.shop.repository;
 
 import hibernate.hibernate.util.HibernateUtil;
+import hibernate.shop.domain.OrderComplaint;
 import org.hibernate.Session;
 
-public class ProductRatingRepository {
+public class OrderComplaintRepository {
 
-    public static void saveProductRating(ProductRating productRating) {
+    public static void saveOrderComplaint(OrderComplaint orderComplaint) {
         Session session = null;
         try {
             session = HibernateUtil.openSession();
             session.getTransaction().begin();
-            session.saveOrUpdate(productRating);
+            session.saveOrUpdate(orderComplaint);
             session.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace();

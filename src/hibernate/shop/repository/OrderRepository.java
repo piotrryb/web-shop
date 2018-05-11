@@ -1,7 +1,7 @@
-package hibernate.shop.order;
+package hibernate.shop.repository;
 
 import hibernate.hibernate.util.HibernateUtil;
-import hibernate.shop.order.Order;
+import hibernate.shop.Order;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 

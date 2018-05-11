@@ -1,4 +1,4 @@
-package hibernate.shop.complaint;
+package hibernate.shop;
 
 public enum ComplaintStatus {
     PENDING, REJECTED, APPROVED

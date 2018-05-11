@@ -1,7 +1,9 @@
-package hibernate.shop.order;
+package hibernate.shop;
 
-import hibernate.shop.User;
-import hibernate.shop.complaint.OrderComplaint;
+import hibernate.shop.domain.User;
+import hibernate.shop.domain.OrderComplaint;
+import hibernate.shop.domain.OrderDetail;
+import hibernate.shop.domain.OrderHistory;
 import lombok.*;
 
 import javax.persistence.*;

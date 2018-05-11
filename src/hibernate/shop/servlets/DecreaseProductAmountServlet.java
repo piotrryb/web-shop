@@ -1,11 +1,11 @@
 package hibernate.shop.servlets;
 
 import hibernate.shop.ProjectHelper;
-import hibernate.shop.User;
+import hibernate.shop.domain.User;
 import hibernate.shop.UserSessionHelper;
-import hibernate.shop.cart.Cart;
-import hibernate.shop.cart.CartDetail;
-import hibernate.shop.cart.CartRepository;
+import hibernate.shop.domain.Cart;
+import hibernate.shop.domain.CartDetail;
+import hibernate.shop.repository.CartRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

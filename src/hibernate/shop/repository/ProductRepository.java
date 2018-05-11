@@ -1,7 +1,9 @@
-package hibernate.shop.product;
+package hibernate.shop.repository;
 
 import hibernate.hibernate.util.HibernateUtil;
-import hibernate.shop.ProductRating;
+import hibernate.shop.domain.ProductRating;
+import hibernate.shop.domain.Product;
+import hibernate.shop.ProductType;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 

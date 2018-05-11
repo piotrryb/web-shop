@@ -1,7 +1,6 @@
-package hibernate.shop;
+package hibernate.shop.domain;
 
-import hibernate.shop.cart.Cart;
-import hibernate.shop.order.Order;
+import hibernate.shop.Order;
 import lombok.*;
 
 import javax.persistence.*;

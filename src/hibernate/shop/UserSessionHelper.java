@@ -1,5 +1,8 @@
 package hibernate.shop;
 
+import hibernate.shop.domain.User;
+import hibernate.shop.repository.UserRepository;
+
 import javax.servlet.http.Cookie;
 import java.util.Arrays;
 import java.util.Optional;

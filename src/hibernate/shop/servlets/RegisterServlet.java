@@ -1,7 +1,7 @@
 package hibernate.shop.servlets;
 
-import hibernate.shop.User;
-import hibernate.shop.UserRepository;
+import hibernate.shop.domain.User;
+import hibernate.shop.repository.UserRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

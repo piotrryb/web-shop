@@ -1,15 +1,15 @@
 package hibernate.shop.servlets;
 
 import hibernate.shop.OrderStatus;
-import hibernate.shop.User;
+import hibernate.shop.domain.User;
 import hibernate.shop.UserSessionHelper;
-import hibernate.shop.cart.Cart;
-import hibernate.shop.cart.CartDetail;
-import hibernate.shop.cart.CartRepository;
-import hibernate.shop.order.Order;
-import hibernate.shop.order.OrderDetail;
-import hibernate.shop.order.OrderHistory;
-import hibernate.shop.order.OrderRepository;
+import hibernate.shop.domain.Cart;
+import hibernate.shop.domain.CartDetail;
+import hibernate.shop.repository.CartRepository;
+import hibernate.shop.Order;
+import hibernate.shop.domain.OrderDetail;
+import hibernate.shop.domain.OrderHistory;
+import hibernate.shop.repository.OrderRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

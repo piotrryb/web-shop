@@ -1,9 +1,7 @@
-package hibernate.shop.product;
+package hibernate.shop.domain;
 
 import hibernate.shop.Price;
-import hibernate.shop.ProductRating;
-import hibernate.shop.cart.CartDetail;
-import hibernate.shop.order.OrderDetail;
+import hibernate.shop.ProductType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,10 +14,8 @@ import java.util.Set;
 @Data
 @EqualsAndHashCode(exclude = {"orderDetailSet", "cartDetailSet", "productRatingSet"})
 public class Product implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
     private String name;
@@ -38,7 +34,6 @@ public class Product implements Serializable {
     @Lob
     private byte[] image;
 
-    // one product may be on many positions in order
     @OneToMany(mappedBy = "product")
     Set<OrderDetail> orderDetailSet;
 

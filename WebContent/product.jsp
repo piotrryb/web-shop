@@ -1,7 +1,7 @@
-<%@ page import="hibernate.shop.ProductRating" %>
+<%@ page import="hibernate.shop.domain.ProductRating" %>
 <%@ page import="hibernate.shop.ProjectHelper" %>
-<%@ page import="hibernate.shop.product.Product" %>
-<%@ page import="hibernate.shop.product.ProductRepository" %>
+<%@ page import="hibernate.shop.domain.Product" %>
+<%@ page import="hibernate.shop.repository.ProductRepository" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Optional" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

@@ -1,7 +1,7 @@
-package hibernate.shop.order;
+package hibernate.shop.domain;
 
 import hibernate.shop.Price;
-import hibernate.shop.product.Product;
+import hibernate.shop.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +17,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 public class OrderDetail implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;

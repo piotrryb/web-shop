@@ -1,8 +1,8 @@
-<%@ page import="hibernate.shop.product.Product" %>
-<%@ page import="hibernate.shop.product.ProductRepository" %>
+<%@ page import="hibernate.shop.domain.Product" %>
+<%@ page import="hibernate.shop.repository.ProductRepository" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Optional" %>
-<%@ page import="hibernate.shop.product.ProductType" %>
+<%@ page import="hibernate.shop.ProductType" %>
 <%@ page import="hibernate.shop.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>

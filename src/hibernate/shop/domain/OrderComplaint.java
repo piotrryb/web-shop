@@ -1,6 +1,7 @@
-package hibernate.shop.complaint;
+package hibernate.shop.domain;
 
-import hibernate.shop.order.Order;
+import hibernate.shop.ComplaintStatus;
+import hibernate.shop.Order;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,7 +15,6 @@ import java.util.Set;
 @Builder
 @EqualsAndHashCode(exclude = "orderSet")
 public class OrderComplaint implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -26,5 +26,4 @@ public class OrderComplaint implements Serializable {
 
     @ManyToMany(mappedBy = "orderComplaintSet", cascade = CascadeType.ALL)
     Set<Order> orderSet;
-
 }

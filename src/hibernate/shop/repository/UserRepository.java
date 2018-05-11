@@ -1,6 +1,7 @@
-package hibernate.shop;
+package hibernate.shop.repository;
 
 import hibernate.hibernate.util.HibernateUtil;
+import hibernate.shop.domain.User;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 

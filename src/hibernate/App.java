@@ -1,25 +1,5 @@
 package hibernate;
 
-import hibernate.shop.*;
-import hibernate.shop.cart.Cart;
-import hibernate.shop.cart.CartDetail;
-import hibernate.shop.cart.CartRepository;
-import hibernate.shop.complaint.ComplaintStatus;
-import hibernate.shop.complaint.OrderComplaint;
-import hibernate.shop.complaint.OrderComplaintRepository;
-import hibernate.shop.order.Order;
-import hibernate.shop.order.OrderDetail;
-import hibernate.shop.order.OrderRepository;
-import hibernate.shop.product.Product;
-import hibernate.shop.product.ProductRepository;
-import hibernate.shop.product.ProductType;
-
-import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
 public class App {
 
     public static void main(String[] args) {

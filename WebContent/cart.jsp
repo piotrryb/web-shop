@@ -1,5 +1,5 @@
-<%@ page import="hibernate.shop.cart.CartRepository" %>
-<%@ page import="hibernate.shop.cart.Cart" %>
+<%@ page import="hibernate.shop.repository.CartRepository" %>
+<%@ page import="hibernate.shop.domain.Cart" %>
 <%@ page import="java.util.Optional" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>

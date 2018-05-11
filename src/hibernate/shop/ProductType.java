@@ -1,4 +1,4 @@
-package hibernate.shop.product;
+package hibernate.shop;
 
 public enum ProductType {
     CAR, TOY, FOOD

@@ -1,7 +1,7 @@
-<%@ page import="hibernate.shop.order.OrderDetail" %>
+<%@ page import="hibernate.shop.domain.OrderDetail" %>
 <%@ page import="java.util.List" %>
-<%@ page import="hibernate.shop.order.Order" %>
-<%@ page import="hibernate.shop.order.OrderRepository" %>
+<%@ page import="hibernate.shop.Order" %>
+<%@ page import="hibernate.shop.repository.OrderRepository" %>
 <%@ page import="java.util.Optional" %>
 <%@ page import="hibernate.shop.ProjectHelper" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

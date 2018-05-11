@@ -1,8 +1,8 @@
 package hibernate.shop.servlets;
 
 import hibernate.shop.ProjectHelper;
-import hibernate.shop.product.Product;
-import hibernate.shop.product.ProductRepository;
+import hibernate.shop.domain.Product;
+import hibernate.shop.repository.ProductRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

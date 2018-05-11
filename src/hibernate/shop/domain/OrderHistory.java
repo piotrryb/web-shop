@@ -1,29 +1,32 @@
-package hibernate.shop;
+package hibernate.shop.domain;
 
-import hibernate.shop.product.Product;
+import hibernate.shop.OrderStatus;
+import hibernate.shop.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductRating {
+@Builder
+public class OrderHistory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    Double rating;
-    String description;
-    LocalDateTime createDate;
+
+    LocalDateTime statusDate;
+
+    @Enumerated(EnumType.STRING)
+    OrderStatus orderStatus;
+
     @ManyToOne
-    User user;
-    @ManyToOne
-    Product product;
-    boolean isVisible;
+    @JoinColumn
+    Order order;
 }

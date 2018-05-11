@@ -1,11 +1,10 @@
-package hibernate.shop.cart;
+package hibernate.shop.repository;
 
 import hibernate.hibernate.util.HibernateUtil;
-import hibernate.shop.cart.Cart;
+import hibernate.shop.domain.Cart;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import java.util.Collections;
 import java.util.Optional;
 
 public class CartRepository {
