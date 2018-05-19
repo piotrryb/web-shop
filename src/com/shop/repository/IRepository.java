@@ -1,21 +1,20 @@
 package com.shop.repository;
 
 import com.hibernate.util.HibernateUtil;
-import com.shop.domain.OrderComplaint;
 import org.hibernate.Session;
 
-public class OrderComplaintRepository {
+public interface IRepository {
 
-    public static void saveOrderComplaint(OrderComplaint orderComplaint) {
+    static <T> void save(T t) {
         Session session = null;
         try {
             session = HibernateUtil.openSession();
             session.getTransaction().begin();
-            session.saveOrUpdate(orderComplaint);
+            session.saveOrUpdate(t);
             session.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace();
-            if (session.getTransaction().isActive()) {
+            if (session != null && session.getTransaction().isActive()) {
                 session.getTransaction().rollback();
             }
         } finally {

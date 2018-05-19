@@ -24,7 +24,7 @@ public class ProjectHelper {
         try {
             return new Double(productAmount);
         } catch (NumberFormatException nbf) {
-            return new Double(0);
+            return (double) 0;
         }
     }
 }

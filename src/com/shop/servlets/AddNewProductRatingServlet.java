@@ -1,10 +1,11 @@
 package com.shop.servlets;
 
-import com.shop.*;
+import com.shop.ProjectHelper;
+import com.shop.UserSessionHelper;
 import com.shop.domain.Product;
 import com.shop.domain.ProductRating;
 import com.shop.domain.User;
-import com.shop.repository.ProductRatingRepository;
+import com.shop.repository.IRepository;
 import com.shop.repository.ProductRepository;
 
 import javax.servlet.ServletException;
@@ -33,8 +34,8 @@ public class AddNewProductRatingServlet extends HttpServlet {
             productRating.setRating(rating);
             productRating.setUser(userFromCookie);
             productRating.setProduct(product.get());
-            ProductRatingRepository.saveProductRating(productRating);
+            IRepository.save(productRating);
         }
-        req.getRequestDispatcher("/product.jsp?productId="+product.get().getId()).forward(req,resp);
+        req.getRequestDispatcher("/product.jsp?productId=" + product.get().getId()).forward(req, resp);
     }
 }

@@ -12,10 +12,10 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class LoginServlet extends HttpServlet {
-    //  HttpServletRequest zawiera dane od klienta (przegladarki)
-    //  np parametry, dane z formularza, ciastka,
-    //  HttpServletResponse zawiera dane ktore odeslemy do klienta (pregladarki)
-    //  mozemy wyslac kod strony html, ciastka, zrobic przekierowanie
+    //  HttpServletRequest contains data from the client (browsers)
+    //  e.g. parameters, data from the form, cookies,
+    //  HttpServletResponse contains data that will be sent to the client (browsers)
+    //  e.g. send HTML code, cookies, redirect
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String password = req.getParameter("password");

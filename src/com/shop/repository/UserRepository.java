@@ -13,8 +13,8 @@ public class UserRepository {
         Session session = null;
         try {
             session = HibernateUtil.openSession();
-            String jpql = "SELECT u FROM User u WHERE u.email = :email AND u.password = :password";
-            Query query = session.createQuery(jpql);
+            String queryJPQL = "SELECT u FROM User u WHERE u.email = :email AND u.password = :password";
+            Query query = session.createQuery(queryJPQL);
             query.setParameter("email", email);
             query.setParameter("password", password);
 
@@ -33,8 +33,8 @@ public class UserRepository {
         Session session = null;
         try {
             session = HibernateUtil.openSession();
-            String jpql = "SELECT u FROM User u WHERE u.email = :email";
-            Query query = session.createQuery(jpql);
+            String queryJPQL = "SELECT u FROM User u WHERE u.email = :email";
+            Query query = session.createQuery(queryJPQL);
             query.setParameter("email", email);
 
             return Optional.ofNullable((User) query.getSingleResult());
@@ -48,22 +48,4 @@ public class UserRepository {
         }
     }
 
-    public static void saveUser(User user) {
-        Session session = null;
-        try {
-            session = HibernateUtil.openSession();
-            session.getTransaction().begin();
-            session.saveOrUpdate(user);
-            session.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
-            }
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-    }
 }

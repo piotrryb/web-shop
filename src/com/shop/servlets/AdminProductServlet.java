@@ -1,10 +1,10 @@
 package com.shop.servlets;
 
 import com.shop.Price;
+import com.shop.ProductType;
 import com.shop.ProjectHelper;
 import com.shop.domain.Product;
-import com.shop.repository.ProductRepository;
-import com.shop.ProductType;
+import com.shop.repository.IRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -48,12 +48,10 @@ public class AdminProductServlet extends HttpServlet {
         InputStream input = req.getPart("image").getInputStream();
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         byte[] buffer = new byte[10240];
-        for (int length = 0; (length = input.read(buffer)) > 0; )
+        for (int length; (length = input.read(buffer)) > 0; )
             output.write(buffer, 0, length);
 
         product.setImage(output.toByteArray());
-
-
-        ProductRepository.saveProduct(product);
+        IRepository.save(product);
     }
 }

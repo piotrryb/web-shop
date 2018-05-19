@@ -1,9 +1,9 @@
 package com.shop.repository;
 
 import com.hibernate.util.HibernateUtil;
-import com.shop.domain.ProductRating;
-import com.shop.domain.Product;
 import com.shop.ProductType;
+import com.shop.domain.Product;
+import com.shop.domain.ProductRating;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -17,25 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class ProductRepository {
-
-    public static void saveProduct(Product product) {
-        Session session = null;
-        try {
-            session = HibernateUtil.openSession();
-            session.getTransaction().begin();
-            session.saveOrUpdate(product);
-            session.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            if (session.getTransaction().isActive()) {
-                session.getTransaction().rollback();
-            }
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-    }
 
     public static void deleteById(Long id) {
         Session session = null;

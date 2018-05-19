@@ -1,12 +1,13 @@
 package com.shop.servlets;
 
 import com.shop.ProjectHelper;
-import com.shop.domain.User;
 import com.shop.UserSessionHelper;
 import com.shop.domain.Cart;
 import com.shop.domain.CartDetail;
-import com.shop.repository.CartRepository;
 import com.shop.domain.Product;
+import com.shop.domain.User;
+import com.shop.repository.CartRepository;
+import com.shop.repository.IRepository;
 import com.shop.repository.ProductRepository;
 
 import javax.servlet.ServletException;
@@ -40,16 +41,16 @@ public class AddProductToCartServlet extends HttpServlet {
                 if (productInCart.isPresent()) {
                     //product is in cart
                     productInCart.get().setAmount(productInCart.get().getAmount().add(productAmount));
-                    CartRepository.saveCart(cart);
-                    writer.write("Zwiększono liczbę produktu z id " + productId + " w koszyku.");
+                    IRepository.save(cart);
+                    writer.write("Increased the number of product with id " + productId + " in cart.");
                 } else {
                     // product is not in cart
                     boolean result = createNewCartDetail(productId, productAmount, cart);
                     if (result) {
-                        CartRepository.saveCart(cart);
-                        writer.write("Dodano produkt z id " + productId + " do koszyka.");
+                        IRepository.save(cart);
+                        writer.write("Added product with id " + productId + " to cart.");
                     } else {
-                        writer.write("Nie ma takiego produktu.");
+                        writer.write("There is no such product.");
                     }
                 }
             } else {
@@ -58,24 +59,23 @@ public class AddProductToCartServlet extends HttpServlet {
                 cart.setCartDetailSet(new HashSet<>());
                 boolean result = createNewCartDetail(productId, productAmount, cart);
                 if (result) {
-                    CartRepository.saveCart(cart);
-                    writer.write("Dodano produkt z id " + productId + " do koszyka.");
+                    IRepository.save(cart);
+                    writer.write("Added product with id " + productId + " to cart.");
                 } else {
-                    writer.write("Nie ma takiego produktu.");
+                    writer.write("There is no such product.");
                 }
             }
         } else {
             if (productId <= 0) {
-                writer.write("Nie ma takiego produktu.");
+                writer.write("There is no such product.");
             }
             if (productAmount.compareTo(BigDecimal.ZERO) <= 0) {
-                writer.write("Nie można dodać produktu z ilością mniejszą lub równą zero.");
+                writer.write("You can not add product with amount zero or less.");
             }
             if (user == null) {
-                writer.write("Proszę się zalogować.");
+                writer.write("Login to your account.");
             }
         }
-
         req.getRequestDispatcher("/cart.jsp").forward(req, resp);
     }
 

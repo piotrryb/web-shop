@@ -1,15 +1,10 @@
 package com.shop.servlets;
 
 import com.shop.OrderStatus;
-import com.shop.domain.User;
 import com.shop.UserSessionHelper;
-import com.shop.domain.Cart;
-import com.shop.domain.CartDetail;
+import com.shop.domain.*;
 import com.shop.repository.CartRepository;
-import com.shop.domain.Order;
-import com.shop.domain.OrderDetail;
-import com.shop.domain.OrderHistory;
-import com.shop.repository.OrderRepository;
+import com.shop.repository.IRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,10 +24,10 @@ public class CreateOrderServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User userFromCookie = UserSessionHelper.getUserFromCookie(req.getCookies());
         if (userFromCookie != null) {
-            Optional<Cart> byUserId = CartRepository.findByUserId(userFromCookie.getId());
-            byUserId.ifPresent(x -> createAndSaveOrder(x));
+            Optional<Cart> cartByUserId = CartRepository.findByUserId(userFromCookie.getId());
+            cartByUserId.ifPresent(this::createAndSaveOrder);
         }
-        req.getRequestDispatcher("/orderHistory.jsp").forward(req,resp);
+        req.getRequestDispatcher("/orderHistory.jsp").forward(req, resp);
     }
 
     private void createAndSaveOrder(Cart cart) {
@@ -55,7 +50,7 @@ public class CreateOrderServlet extends HttpServlet {
             od.setAmount(cd.getAmount());
             order.addOrderDetail(od);
         }
-        OrderRepository.saveOrder(order);
+        IRepository.save(order);
         CartRepository.removeCart(cart);
     }
 }

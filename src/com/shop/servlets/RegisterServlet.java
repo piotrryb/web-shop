@@ -1,6 +1,7 @@
 package com.shop.servlets;
 
 import com.shop.domain.User;
+import com.shop.repository.IRepository;
 import com.shop.repository.UserRepository;
 
 import javax.servlet.ServletException;
@@ -22,19 +23,19 @@ public class RegisterServlet extends HttpServlet {
 
         boolean isValid = true;
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() || password2.isEmpty()) {
-            System.out.println("Proszę uzupełnić formularz!");
+            System.out.println("Complete the form with your information!");
             isValid = false;
         }
 
         if (!password.equals(password2)) {
-            System.out.println("Hasła są różne!");
+            System.out.println("Passwords are not the same!");
             isValid = false;
         }
 
         Optional<User> byEmail = UserRepository.findByEmail(email);
         if (byEmail.isPresent()) {
             isValid = false;
-            System.out.println("Użytkownik z takim emailem już istnieje!");
+            System.out.println("User with this email already exists!");
         }
 
         if (isValid) {
@@ -43,7 +44,7 @@ public class RegisterServlet extends HttpServlet {
             user.setPassword(password);
             user.setFirstName(firstName);
             user.setLastName(lastName);
-            UserRepository.saveUser(user);
+            IRepository.save(user);
         }
         req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }

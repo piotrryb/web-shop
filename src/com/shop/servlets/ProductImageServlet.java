@@ -4,7 +4,6 @@ import com.shop.ProjectHelper;
 import com.shop.domain.Product;
 import com.shop.repository.ProductRepository;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +14,7 @@ import java.util.Optional;
 @WebServlet(urlPatterns = "/productImage", name = "ProductImageServlet")
 public class ProductImageServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Long productId = ProjectHelper.parseStringToLong(req.getParameter("productId"));
         Optional<Product> oneById = ProductRepository.findOneById(productId);
         if (oneById.isPresent()) {
