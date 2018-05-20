@@ -13,11 +13,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shop Item - Start Bootstrap Template</title>
+    <title>Jeff Shop - cart</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
     <link href="css/shop-homepage.css" rel="stylesheet">
@@ -28,6 +28,7 @@
 
     <!-- Navigation -->
     <%@include file="head.jsp"%>
+
     <%
         if (userFromCookie != null) {
             Optional<Cart> byUserId = CartRepository.findByUserId(userFromCookie.getId());
@@ -53,19 +54,20 @@
                             <th scope="col">Gross price</th>
                             <th scope="col">Total net</th>
                             <th scope="col">Total gross</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${cart.cartDetailSet}" var="cd" varStatus="it">
                         <tr>
                             <th scope="row">${cd.product.name}</th>
-                            <td>
-                                <input name="amount_1" value="${cd.amount}"/>
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true">
-                                    +
-                                    -
-                                </span>
-                            </td>
+                            <td><fmt:formatNumber type="number" minFractionDigits="0" maxFractionDigits="0"
+                                                  value="${cd.amount}"/>
+                                <a href="/decreaseProductAmount?productId=${cd.product.id}&method=add">
+                                    <i class="fas fa-plus-square"></i></a>
+                                <a href="/decreaseProductAmount?productId=${cd.product.id}&method=subtract">
+                                    <i class="fas fa-minus-square"></i></a>
+                                </td>
                             <td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2"
                                                   value="${cd.price.netPrice}"/></td>
                             <td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2"
@@ -74,6 +76,7 @@
                             <fmt:formatNumber var="totalGrossPrice" type="number" minFractionDigits="2" maxFractionDigits="2" value="${cd.price.grossPrice.multiply(cd.amount)}"/>
                             <td>${totalNetPrice}</td>
                             <td>${totalGrossPrice}</td>
+                            <td></td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -85,6 +88,7 @@
                                                   value="${cart.totalNetPrice}"/></td>
                             <td><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2"
                                                   value="${cart.totalGrossPrice}"/></td>
+                            <td></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -92,33 +96,33 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <h5>Metoda dostawy:</h5>
-                        <select class="form-control">
-                        <option>Kurier</option>
-                        <option>Odbiór osobisty</option>
-
-                    </select>
+                        <h5>Delivery method:</h5>
+                        <label>
+                            <select class="form-control">
+                                <option>Courier</option>
+                                <option>In-store pickup</option>
+                            </select>
+                        </label>
                     </div>
                     <div class="col-md-6">
-                        <h5>Adres dostawy</h5>
+                        <h5>Delivery address</h5>
                         <div class="col-md-12">
-                            <label>Miejscowość</label>
-                            <input type="text" class="form-control" name="city" />
+                            <label>City</label>
+                            <input type="text" class="form-control" name="city"/>
                         </div>
                         <div class="col-md-12">
-                            <label>Kod pocztowy</label>
-                            <input type="text" class="form-control" name="zipCode" />
+                            <label>Zip code</label>
+                            <input type="text" class="form-control" name="zipCode"/>
                         </div>
                         <div class="col-md-12">
-                            <label>Ulica</label>
-                            <input type="text" class="form-control" name="street" />
+                            <label>Street</label>
+                            <input type="text" class="form-control" name="street"/>
                         </div>
-
                     </div>
                 </div>
 
                 <div>
-                    <a href="/createOrder" class="btn btn-success">Kup i zapłać</a>
+                    <a href="/createOrder" class="btn btn-success">Buy and pay</a>
                 </div>
 
             </div>
