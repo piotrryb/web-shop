@@ -1,8 +1,8 @@
 package com.shop.servlets;
 
 import com.shop.Price;
-import com.shop.ProductType;
 import com.shop.ProjectHelper;
+import com.shop.domain.Category;
 import com.shop.domain.Product;
 import com.shop.repository.IRepository;
 
@@ -39,11 +39,15 @@ public class AdminProductServlet extends HttpServlet {
         product.setDate(LocalDate.now());
         product.setDescription(description);
         product.setName(name);
+
         Price price = new Price();
         price.setNetPrice(netPrice);
         price.setGrossPrice(grossPrice);
         product.setPrice(price);
-        product.setProductType(ProductType.valueOf(productType));
+
+        Category category = new Category();
+        category.setType(productType);
+        product.setCategory(category);
 
         InputStream input = req.getPart("image").getInputStream();
         ByteArrayOutputStream output = new ByteArrayOutputStream();

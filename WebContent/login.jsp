@@ -27,17 +27,17 @@
                 <section class="login-form">
                     <form method="post" action="/login" role="login">
                         <div>
-                        <a class="navbar-brand" href="/index.jsp">Super Jeff shop</a>
+                            <a class="navbar-brand" href="/index.jsp">Jeff Shop</a>
                         </div>
                         <%--<img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />--%>
-                        <input type="email" name="email" placeholder="Email" required class="form-control input-lg" value="joestudent@gmail.com" />
+                        <input type="email" name="email" placeholder="Email" required class="form-control input-lg" value="mail@gmail.com" />
 
-                        <input type="password" name="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
+                        <input type="password" name="password" class="form-control input-lg" id="password" placeholder="password" aria-required="true" required="" />
 
-                        <div class="pwstrength_viewport_progress"></div>
+                        <%--<div class="pwstrength_viewport_progress"></div>--%>
                         <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>
                         <div>
-                            <a href="/register.jsp">Create account</a> or <a href="#">reset password</a>
+                            <a href="/register.jsp">Create account</a>
                         </div>
                     </form>
                     <div class="form-links">

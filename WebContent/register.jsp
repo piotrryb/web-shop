@@ -31,21 +31,21 @@
                         </div>
                         <%--<img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />--%>
                         <label>Name</label>
-                        <input type="text" name="firstName" placeholder="name" required class="form-control input-lg" value="" />
+                        <input type="text" name="firstName" placeholder="name" aria-required="true" class="form-control input-lg"/>
                         <label>Surname</label>
-                        <input type="text" name="lastName" placeholder="surname" required class="form-control input-lg" value="" />
+                        <input type="text" name="lastName" placeholder="surname" aria-required="true" class="form-control input-lg"/>
                         <label>Email</label>
-                        <input type="text" name="email" placeholder="email" required class="form-control input-lg" value="joestudent@gmail.com" />
+                        <input type="text" name="email" placeholder="email" aria-required="true" class="form-control input-lg"/>
                         <label>Password</label>
-                        <input type="password" name="password" required class="form-control input-lg" placeholder="password" />
+                        <input type="password" name="password" placeholder="password" aria-required="true" class="form-control input-lg"/>
                         <label>Repeat password</label>
-                        <input type="password" class="form-control input-lg" id="password2" name="password2" placeholder="password" required="" />
+                        <input type="password" name="password2" placeholder="password2" aria-required="true" class="form-control input-lg"/>
 
-                        <div class="pwstrength_viewport_progress"></div>
+                        <%--<div class="pwstrength_viewport_progress"></div>--%>
 
                         <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Register</button>
                         <div>
-                            <a href="/login.jsp">Login</a> or <a href="#">change password</a>
+                            <a href="/login.jsp">Login</a>
                         </div>
                     </form>
                     <div class="form-links">

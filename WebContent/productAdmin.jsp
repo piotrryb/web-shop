@@ -1,9 +1,10 @@
+<%@ page import="com.shop.Price" %>
+<%@ page import="com.shop.ProjectHelper" %>
+<%@ page import="com.shop.domain.Category" %>
 <%@ page import="com.shop.domain.Product" %>
 <%@ page import="com.shop.repository.ProductRepository" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Optional" %>
-<%@ page import="com.shop.ProductType" %>
-<%@ page import="com.shop.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,8 +44,9 @@
 <%
     Optional<Product> product = ProductRepository.findOneById(
             ProjectHelper.parseStringToLong(request.getParameter("productId")));
-    ProductType[] values = ProductType.values();
-    pageContext.setAttribute("productTypeList", values);
+    List<Category> categoryList = ProductRepository.findAllCategory();
+
+    pageContext.setAttribute("categoryList", categoryList);
 
     if (product.isPresent()) {
         pageContext.setAttribute("product", product.get());
@@ -70,12 +72,12 @@
         <div class="form-group">
             <label>Product type:</label>
             <select name="productType">
-                <c:forEach items="${productTypeList}" var="pd">
-                    <c:if test="${pd.equals(product.productType)}">
-                        <option selected="selected">${pd.name()}</option>
+                <c:forEach items="${categoryList}" var="pd">
+                    <c:if test="${pd.equals(product.category.type)}">
+                        <option selected="selected">${pd.type}</option>
                     </c:if>
-                    <c:if test="${! pd.equals(product.productType)}">
-                        <option>${pd.name()}</option>
+                    <c:if test="${! pd.equals(product.category.type)}">
+                        <option>${pd.type}</option>
                     </c:if>
                 </c:forEach>
             </select>

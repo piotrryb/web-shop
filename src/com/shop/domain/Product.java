@@ -1,9 +1,7 @@
 package com.shop.domain;
 
 import com.shop.Price;
-import com.shop.ProductType;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,27 +10,31 @@ import java.util.Set;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @EqualsAndHashCode(exclude = {"orderDetailSet", "cartDetailSet", "productRatingSet"})
 public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
-    private String name;
+    String name;
+
+    @ManyToOne
+    @JoinColumn
+    Category category;
 
     @Column()
-    private LocalDate date;
-
-    @Enumerated
-    private ProductType productType;
+    LocalDate date;
 
     @Embedded
-    private Price price;
+    Price price;
 
-    private String description;
+    String description;
 
     @Lob
-    private byte[] image;
+    byte[] image;
 
     @OneToMany(mappedBy = "product")
     Set<OrderDetail> orderDetailSet;
@@ -42,14 +44,4 @@ public class Product implements Serializable {
 
     @OneToMany(mappedBy = "product")
     Set<ProductRating> productRatingSet;
-
-    public Product() {
-    }
-
-    public Product(String name, ProductType productType, Price price) {
-        this.name = name;
-        this.productType = productType;
-        this.price = price;
-        this.date = LocalDate.now();
-    }
 }

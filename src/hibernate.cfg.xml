@@ -22,6 +22,7 @@
         <mapping class="com.shop.domain.CartDetail"/>
         <mapping class="com.shop.domain.User"/>
         <mapping class="com.shop.domain.ProductRating"/>
+        <mapping class="com.shop.domain.Category"/>
 
     </session-factory>
 </hibernate-configuration>
